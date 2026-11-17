@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>후회없음 카드 | 현명한 소비의 시작</title>
+<style>
+:root{
+  --navy:#15244a;
+  --blue:#5267e9;
+  --purple:#8b5cf6;
+  --light:#f5f7ff;
+  --green:#10a779;
+  --red:#e85d70;
+  --muted:#75809a;
+  --border:#e5e9f5;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--light);
+  color:var(--navy);
+  font-family:Arial,"Malgun Gothic",sans-serif;
+  line-height:1.55;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+header{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo{font-size:23px;font-weight:900;color:var(--blue)}
+.logo span{font-size:25px}
+.header-point{
+  background:#edf0ff;
+  color:var(--blue);
+  border-radius:30px;
+  padding:9px 16px;
+  font-weight:800;
+}
+main{max-width:1120px;margin:auto;padding:28px 18px 65px}
+.hero{
+  background:linear-gradient(120deg,#465fe4,#9163e8);
+  color:white;
+  padding:35px;
+  border-radius:24px;
+  margin-bottom:23px;
+  position:relative;
+  overflow:hidden;
+}
+.hero h1{font-size:30px;margin:0 0 10px}
+.hero p{margin:0;opacity:.93}
+.hero .emoji{font-size:55px;position:absolute;right:35px;top:25px}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:22px;
+}
+.stat,.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:23px;
+  box-shadow:0 5px 22px #263c8910;
+}
+.stat small{color:var(--muted);font-weight:700}
+.stat strong{display:block;font-size:25px;margin-top:7px}
+.stat .accent{color:var(--blue)}
+.layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:20px;
+  align-items:start;
+}
+.panel{margin-bottom:20px}
+h2{font-size:21px;margin:0 0 9px}
+h3{font-size:17px;margin:20px 0 10px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 20px}
+label{display:block;font-weight:700;margin:14px 0 7px}
+input,select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d9deee;
+  border-radius:11px;
+  background:white;
+  color:var(--navy);
+  outline:none;
+}
+input:focus,select:focus{border-color:var(--blue)}
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:13px 17px;
+  font-weight:800;
+  transition:.2s;
+}
+.btn:hover:not(:disabled){filter:brightness(.95);transform:translateY(-1px)}
+.primary{background:var(--blue);color:white}
+.success{background:var(--green);color:white}
+.danger{background:#ffebee;color:#c93651}
+.secondary{background:#edf0ff;color:var(--blue)}
+.full{width:100%;margin-top:17px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.actions .btn{flex:1}
+.notice{
+  padding:14px;
+  background:#f1f4ff;
+  border-radius:12px;
+  color:#53619a;
+  font-size:14px;
+  margin-top:15px;
+}
+.error{color:#d33c53;font-size:13px;margin-top:8px;min-height:18px}
+.card-visual{
+  background:linear-gradient(135deg,#202f65,#6d5ce7);
+  border-radius:20px;
+  padding:26px;
+  color:white;
+  min-height:200px;
+  box-shadow:0 15px 25px #3448a330;
+}
+.card-top{display:flex;justify-content:space-between;font-weight:800}
+.chip{font-size:27px;margin:17px 0}
+.card-number{letter-spacing:4px;font-size:20px}
+.card-bottom{display:flex;justify-content:space-between;margin-top:20px;font-size:13px}
+.progress{
+  height:12px;
+  border-radius:20px;
+  background:#e9edfa;
+  overflow:hidden;
+  margin:10px 0;
+}
+.progress div{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#5267e9,#9b6af2);
+  border-radius:20px;
+  transition:width .4s;
+}
+.between{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.muted{color:var(--muted);font-size:13px}
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  background:#f0ecff;
+  color:#6c4fd1;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:800;
+}
+.pending{
+  border:1px solid #e6e9f5;
+  border-radius:14px;
+  padding:16px;
+  margin-top:12px;
+}
+.pending h3{margin:0 0 4px}
+.timer{font-size:24px;color:var(--blue);font-weight:900;margin:9px 0}
+.pending .actions .btn{font-size:13px;padding:10px}
+.empty{
+  padding:26px 10px;
+  text-align:center;
+  color:var(--muted);
+  background:#f8f9ff;
+  border-radius:12px;
+}
+.rowline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+}
+.rowline:last-child{border:0}
+.rowline strong{white-space:nowrap}
+.result{
+  background:#ecfff7;
+  border:1px solid #b4ecd7;
+  color:#087e5b;
+  border-radius:13px;
+  padding:16px;
+  margin-top:15px;
+}
+.result h3{margin:0 0 5px}
+.hidden{display:none!important}
+.bar-row{margin:13px 0}
+.bar-label{display:flex;justify-content:space-between;font-size:14px}
+.bar{
+  background:#edf0fa;
+  height:10px;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:6px;
+}
+.bar div{height:100%;background:#7a76ed;border-radius:10px}
+.tip{
+  background:#fff9e9;
+  color:#876019;
+  padding:16px;
+  border-radius:12px;
+  font-size:14px;
+  margin-top:17px;
+}
+.toast{
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#1c2851;
+  color:white;
+  padding:13px 22px;
+  border-radius:13px;
+  box-shadow:0 10px 30px #0003;
+  z-index:20;
+  max-width:90%;
+  text-align:center;
+}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats .stat:last-child{grid-column:span 2}
+  .stat{padding:17px}
+  .stat strong{font-size:21px}
+  .hero{padding:27px 22px}
+  .hero h1{font-size:24px}
+  .hero .emoji{display:none}
+  .panel{padding:19px}
+}
+@media(max-width:380px){
+  .actions{flex-direction:column}
+  .header-point{font-size:13px}
+  .logo{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>💜</span> 후회없음 카드</div>
+  <div class="header-point">⭐ <span id="topPoints">0</span> P</div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="emoji">🛍️</div>
+  <h1>잠깐의 기다림,<br>후회 없는 소비!</h1>
+  <p>24시간 생각하고 결정하세요.<br>
+  충동구매를 줄이면 포인트가 쌓여요.</p>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <small>💰 이번 달 소비</small>
+    <strong id="monthlySpent">0원</strong>
+  </div>
+  <div class="stat">
+    <small>🎁 보유 포인트</small>
+    <strong class="accent" id="points">0 P</strong>
+  </div>
+  <div class="stat">
+    <small>🌱 구매 취소로 절약</small>
+    <strong id="saved">0원</strong>
+  </div>
+</section>
+
+<div class="layout">
+<div>
+  <section class="panel">
+    <h2>🛒 구매하기</h2>
+    <p class="sub">구매 전에 한 번 더 생각해 볼까요?</p>
+
+    <label for="product">상품 이름</label>
+    <input id="product" maxlength="40"
+      placeholder="예: 무선 이어폰">
+
+    <label for="price">상품 가격 (원)</label>
+    <input id="price" type="number" min="1" step="1"
+      placeholder="예: 150000">
+
+    <label for="category">소비 카테고리</label>
+    <select id="category">
+      <option value="쇼핑">🛍️ 쇼핑</option>
+      <option value="식비">🍔 식비</option>
+      <option value="교통">🚌 교통</option>
+      <option value="문화">🎬 문화/여가</option>
+      <option value="기타">📦 기타</option>
+    </select>
+
+    <div class="notice">
+      💡 <b id="thresholdText">50,000원</b> 이상 구매하면
+      24시간 생각할 기회를 드려요.
+    </div>
+    <div id="purchaseError" class="error" role="alert"></div>
+    <button class="btn primary full" onclick="attemptPurchase()">
+      구매 시도하기 →
+    </button>
+  </section>
+
+  <section class="panel hidden" id="decisionPanel">
+    <h2>🤔 24시간 뒤에도 필요할까요?</h2>
+    <p class="sub">정말 필요한 물건인지 생각해 보세요.</p>
+    <div class="notice" id="decisionInfo"></div>
+    <div class="actions">
+      <button class="btn primary" onclick="deferPurchase()">
+        ⏳ 24시간 기다리기
+      </button>
+      <button class="btn danger" onclick="cancelDecision()">
+        구매 취소
+      </button>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" onclick="buyNow()">
+        지금 구매 확정
+      </button>
+    </div>
+    <p class="muted">※ 즉시 구매에는 취소 보상이 없습니다.</p>
+  </section>
+
+  <section class="panel">
+    <div class="between">
+      <h2>⏳ 구매 대기함</h2>
+      <span class="badge" id="pendingCount">0건 대기</span>
+    </div>
+    <p class="sub">24시간이 지나면 구매 여부를 결정할 수 있어요.</p>
+    <div id="pendingList"></div>
+    <div class="notice">
+      🧪 해커톤 시연용: '24시간 경과 테스트' 버튼으로
+      실제 하루를 기다리지 않고 최종 결정을 시험할 수 있습니다.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>🎁 최근 포인트 적립</h2>
+    <div id="rewardList"></div>
+  </section>
+
+  <section class="panel">
+    <h2>📋 소비 기록</h2>
+    <div id="historyList"></div>
+  </section>
+</div>
+
+<div>
+  <section class="panel">
+    <h2>💳 나의 후회없음 카드</h2>
+    <p class="sub">현명한 소비를 위한 특별한 카드</p>
+    <div class="card-visual">
+      <div class="card-top">
+        <span>NO REGRET</span>
+        <span>✦</span>
+      </div>
+      <div class="chip">▦</div>
+      <div class="card-number">•••• •••• •••• 2026</div>
+      <div class="card-bottom">
+        <span>SMART SPENDER</span>
+        <span>후회없음 CARD</span>
+      </div>
+    </div>
+
+    <h3>🏆 나의 소비 등급</h3>
+    <div class="between">
+      <span class="badge" id="grade">🌱 새싹 소비러</span>
+      <b id="gradePoints">0 P</b>
+    </div>
+    <div class="progress"><div id="gradeBar"></div></div>
+    <p class="muted" id="gradeHint"></p>
+  </section>
+
+  <section class="panel">
+    <h2>🎯 한 달 소비 목표</h2>
+    <p class="sub">목표 안에서 소비하면 보상을 받아요.</p>
+    <label for="budget">월 소비 예산 (원)</label>
+    <input id="budget" type="number" min="1" step="1"
+      placeholder="예: 300000">
+    <div id="budgetError" class="error" role="alert"></div>
+    <button class="btn primary full" onclick="setBudget()">
+      목표 설정하기
+    </button>
+
+    <h3>이번 달 예산 사용률</h3>
+    <div class="between">
+      <span id="budgetSpent">0원 사용</span>
+      <b id="budgetPercent">0%</b>
+    </div>
+    <div class="progress"><div id="budgetBar"></div></div>
+    <p class="muted" id="budgetRemaining"></p>
+    <div class="notice">
+      🏅 월말에 예산을 지키면 500P를 지급해요.
+      월말 정산은 다음 달 첫 방문 시 자동 처리됩니다.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>📊 소비 습관 분석</h2>
+    <p class="sub">이번 달 어디에 가장 많이 썼을까요?</p>
+    <div id="analysis"></div>
+    <div class="tip" id="advice">
+      아직 소비 기록이 없어요.
+      첫 구매를 기록하면 맞춤형 분석이 시작됩니다.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>⚙️ 서비스 설정</h2>
+    <label for="threshold">24시간 유예 기준 금액 (원)</label>
+    <input id="threshold" type="number" min="1" step="1"
+      value="50000">
+    <div id="settingError" class="error" role="alert"></div>
+    <button class="btn secondary full" onclick="setThreshold()">
+      기준 금액 변경
+    </button>
+    <button class="btn danger full" onclick="resetData()">
+      모든 시연 데이터 초기화
+    </button>
+  </section>
+</div>
+</div>
+</main>
+
+<footer>
+  후회없음 카드 © 2026<br>
+  AI 해커톤 교육용 시뮬레이션 · 실제 카드 결제 및 현금 지급 없음
+</footer>
+
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script>
+const STORAGE_KEY = "noRegretCard_v1";
+const DAY = 24 * 60 * 60 * 1000;
+const CATEGORIES = ["쇼핑","식비","교통","문화","기타"];
+
+const money = n => Math.round(n).toLocaleString("ko-KR")+"원";
+const pointText = n => Math.round(n).toLocaleString("ko-KR")+" P";
+const el = id => document.getElementById(id);
+const monthKey = date => {
+  const d = new Date(date);
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");
+};
+const currentMonth = () => monthKey(Date.now());
+
+function defaultData(){
+  return {
+    points:0,
+    saved:0,
+    threshold:50000,
+    budget:300000,
+    pending:[],
+    history:[],
+    rewards:[],
+    lastSettledMonth:null,
+    budgets:{[currentMonth()]:300000}
+  };
+}
+
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return defaultData();
+    const parsed=JSON.parse(raw);
+    if(!parsed || typeof parsed!=="object")throw Error();
+    const d={...defaultData(),...parsed};
+    if(!Array.isArray(d.pending))d.pending=[];
+    if(!Array.isArray(d.history))d.history=[];
+    if(!Array.isArray(d.rewards))d.rewards=[];
+    if(!d.budgets || typeof d.budgets!=="object")d.budgets={};
+    return d;
+  }catch(e){
+    return defaultData();
+  }
+}
+let data=loadData();
+let activePurchase=null;
+let toastTimeout=null;
+
+function save(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  }catch(e){
+    showToast("브라우저 저장 공간을 확인해 주세요.");
+  }
+}
+function showToast(message){
+  el("toast").textContent=message;
+  el("toast").classList.remove("hidden");
+  clearTimeout(toastTimeout);
+  toastTimeout=setTimeout(()=>el("toast").classList.add("hidden"),3500);
+}
+function error(id,message){el(id).textContent=message}
+function validAmount(value){
+  const n=Number(value);
+  return value!=="" && Number.isSafeInteger(n) && n>0 && n<=1000000000;
+}
+function createId(){
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,9);
+}
+function dateLabel(t){
+  return new Date(t).toLocaleString("ko-KR");
+}
+function escapeHTML(str){
+  return String(str).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  })[c]);
+}
+function spentInMonth(month){
+  return data.history
+    .filter(h=>h.type==="purchase" && monthKey(h.time)===month)
+    .reduce((sum,h)=>sum+h.price,0);
+}
+function addReward(amount,reason){
+  data.points+=amount;
+  data.rewards.unshift({
+    id:createId(),amount,reason,time:Date.now()
+  });
+}
+function addHistory(type,item){
+  data.history.unshift({
+    ...item,type,id:createId(),time:Date.now()
+  });
+}
+function rewardFor(price){
+  return Math.min(1000,Math.floor(price*0.01));
+}
+
+function attemptPurchase(){
+  const name=el("product").value.trim();
+  const raw=el("price").value;
+  const category=el("category").value;
+  error("purchaseError","");
+
+  if(!name){
+    error("purchaseError","상품 이름을 입력해 주세요.");
+    return;
+  }
+  if(!validAmount(raw)){
+    error("purchaseError","1원~10억 원 사이의 정수 금액을 입력해 주세요.");
+    return;
+  }
+
+  const price=Number(raw);
+  const item={name,price,category};
+
+  if(price<data.threshold){
+    completePurchase(item);
+    showToast("기준 금액 미만이므로 구매가 바로 기록되었어요.");
+    clearPurchaseForm();
+    return;
+  }
+
+  activePurchase=item;
+  el("decisionInfo").textContent=
+    name+" · "+money(price)+
+    " | 기다린 뒤 취소하면 "+pointText(rewardFor(price))+
+    "를 받을 수 있어요.";
+  el("decisionPanel").classList.remove("hidden");
+  el("decisionPanel").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function clearPurchaseForm(){
+  el("product").value="";
+  el("price").value="";
+}
+function hideDecision(){
+  activePurchase=null;
+  el("decisionPanel").classList.add("hidden");
+  clearPurchaseForm();
+}
+function completePurchase(item){
+  addHistory("purchase",item);
+  save();
+  render();
+}
+function buyNow(){
+  if(!activePurchase)return;
+  completePurchase(activePurchase);
+  hideDecision();
+  showToast("구매가 확정되었어요. 소비 기록에 반영했습니다.");
+}
+function deferPurchase(){
+  if(!activePurchase)return;
+  data.pending.unshift({
+    ...activePurchase,
+    id:createId(),
+    startedAt:Date.now()
+  });
+  hideDecision();
+  save();
+  render();
+  showToast("24시간 구매 유예가 시작되었어요! ⏳");
+}
+function cancelDecision(){
+  if(!activePurchase)return;
+  cancelItem(activePurchase);
+  hideDecision();
+}
+function cancelItem(item){
+  const reward=rewardFor(item.price);
+  data.saved+=item.price;
+  addReward(reward,"충동구매 취소: "+item.name);
+  addHistory("cancel",item);
+  save();
+  render();
+  showToast("🎉 구매 취소 성공! "+pointText(reward)+" 적립!");
+}
+function pendingItem(id){
+  return data.pending.find(p=>p.id===id);
+}
+function cancelPending(id){
+  const item=pendingItem(id);
+  if(!item)return;
+  data.pending=data.pending.filter(p=>p.id!==id);
+  cancelItem(item);
+}
+function confirmPending(id){
+  const item=pendingItem(id);
+  if(!item)return;
+  if(Date.now()-item.startedAt<DAY){
+    showToast("아직 24시간이 지나지 않았어요.");
+    return;
+  }
+  data.pending=data.pending.filter(p=>p.id!==id);
+  completePurchase(item);
+  showToast("24시간 고민 후 구매를 확정했어요.");
+}
+function simulateDay(id){
+  const item=pendingItem(id);
+  if(!item)return;
+  item.startedAt=Date.now()-DAY-1000;
+  save();
+  render();
+  showToast("시연용으로 24시간이 경과했어요.");
+}
+function setBudget(){
+  const raw=el("budget").value;
+  error("budgetError","");
+  if(!validAmount(raw)){
+    error("budgetError","1원~10억 원 사이의 예산을 입력해 주세요.");
+    return;
+  }
+  data.budget=Number(raw);
+  data.budgets[currentMonth()]=data.budget;
+  save();
+  render();
+  showToast("이번 달 소비 목표가 저장되었어요.");
+}
+function setThreshold(){
+  const raw=el("threshold").value;
+  error("settingError","");
+  if(!validAmount(raw)){
+    error("settingError","1원~10억 원 사이의 기준 금액을 입력해 주세요.");
+    return;
+  }
+  data.threshold=Number(raw);
+  save();
+  render();
+  showToast("구매 유예 기준 금액이 변경되었어요.");
+}
+function resetData(){
+  if(!confirm("모든 구매 기록과 포인트를 초기화할까요?"))return;
+  data=defaultData();
+  activePurchase=null;
+  el("decisionPanel").classList.add("hidden");
+  clearPurchaseForm();
+  save();
+  render();
+  showToast("시연 데이터가 초기화되었어요.");
+}
+
+// 지난달부터 빠진 달까지 월별 목표 달성 정산
+function settleMonths(){
+  const months=Object.keys(data.budgets)
+    .filter(m=>m<currentMonth())
+    .sort();
+
+  let changed=false;
+  for(const m of months){
+    if(data.lastSettledMonth && m<=data.lastSettledMonth)continue;
+    const budget=data.budgets[m];
+    const spent=spentInMonth(m);
+    if(budget>0 && spent<=budget){
+      addReward(500,m+" 소비 목표 달성");
+    }
+    data.lastSettledMonth=m;
+    changed=true;
+  }
+  if(!(currentMonth() in data.budgets)){
+    data.budgets[currentMonth()]=data.budget;
+    changed=true;
+  }
+  if(changed)save();
+}
+
+function renderStats(){
+  const spent=spentInMonth(currentMonth());
+  el("monthlySpent").textContent=money(spent);
+  el("points").textContent=pointText(data.points);
+  el("topPoints").textContent=data.points.toLocaleString("ko-KR");
+  el("saved").textContent=money(data.saved);
+}
+function renderGrade(){
+  const p=data.points;
+  let grade,next,base;
+  if(p<500){
+    grade="🌱 새싹 소비러";next=500;base=0;
+  }else if(p<1500){
+    grade="🥉 브론즈 소비러";next=1500;base=500;
+  }else if(p<3000){
+    grade="🥈 실버 소비러";next=3000;base=1500;
+  }else if(p<5000){
+    grade="🥇 골드 소비러";next=5000;base=3000;
+  }else{
+    grade="💎 다이아 소비러";next=5000;base=5000;
+  }
+  el("grade").textContent=grade;
+  el("gradePoints").textContent=pointText(p);
+  const percent=p>=5000?100:(p-base)/(next-base)*100;
+  el("gradeBar").style.width=percent+"%";
+  el("gradeHint").textContent=p>=5000
+    ?"최고 등급에 도달했어요! 🎉"
+    :"다음 등급까지 "+pointText(next-p)+" 남았어요.";
+}
+function renderBudget(){
+  const spent=spentInMonth(currentMonth());
+  const budget=data.budget;
+  const percent=spent/budget*100;
+  el("budget").value=budget;
+  el("budgetSpent").textContent=money(spent)+" 사용";
+  el("budgetPercent").textContent=percent.toFixed(1)+"%";
+  el("budgetBar").style.width=Math.min(percent,100)+"%";
+  el("budgetBar").style.background=percent>100?"#e85d70":
+    "linear-gradient(90deg,#5267e9,#9b6af2)";
+  el("budgetRemaining").textContent=spent<=budget
+    ?"남은 예산: "+money(budget-spent)
+    :"예산을 "+money(spent-budget)+" 초과했어요.";
+}
+function renderPending(){
+  el("pendingCount").textContent=data.pending.length+"건 대기";
+  const list=el("pendingList");
+  list.replaceChildren();
+  if(data.pending.length===0){
+    list.innerHTML='<div class="empty">📭 대기 중인 구매가 없어요.</div>';
+    return;
+  }
+  data.pending.forEach(item=>{
+    const remaining=Math.max(0,DAY-(Date.now()-item.startedAt));
+    const ready=remaining===0;
+    const hours=Math.floor(remaining/3600000);
+    const mins=Math.floor(remaining%3600000/60000);
+    const secs=Math.floor(remaining%60000/1000);
+    const time=[hours,mins,secs].map(n=>String(n).padStart(2,"0")).join(":");
+    const card=document.createElement("div");
+    card.className="pending";
+    card.innerHTML=`
+      <h3>${escapeHTML(item.name)}</h3>
+      <div class="between">
+        <span class="muted">${escapeHTML(item.category)}</span>
+        <strong>${money(item.price)}</strong>
+      </div>
+      <div class="timer">${ready?"✅ 결정 가능":time}</div>
+      <p class="muted">${ready?"24시간이 지났어요. 최종 결정을 내려주세요.":
+        "남은 고민 시간"}</p>
+      <div class="actions">
+        <button class="btn danger cancel-btn">구매 취소 +${rewardFor(item.price)}P</button>
+        <button class="btn primary confirm-btn" ${ready?"":"disabled"}>구매 확정</button>
+      </div>
+      ${ready?"":'<button class="btn secondary full test-btn">🧪 24시간 경과 테스트</button>'}
+    `;
+    card.querySelector(".cancel-btn").onclick=()=>cancelPending(item.id);
+    card.querySelector(".confirm-btn").onclick=()=>confirmPending(item.id);
+    const test=card.querySelector(".test-btn");
+    if(test)test.onclick=()=>simulateDay(item.id);
+    list.appendChild(card);
+  });
+}
+function renderRewards(){
+  const list=el("rewardList");
+  if(!data.rewards.length){
+    list.innerHTML='<div class="empty">🎁 아직 적립 내역이 없어요.</div>';
+    return;
+  }
+  list.innerHTML=data.rewards.slice(0,8).map(r=>`
+    <div class="rowline">
+      <div><b>${escapeHTML(r.reason)}</b>
+      <div class="muted">${dateLabel(r.time)}</div></div>
+      <strong style="color:var(--green)">+${pointText(r.amount)}</strong>
+    </div>
+  `).join("");
+}
+function renderHistory(){
+  const list=el("historyList");
+  if(!data.history.length){
+    list.innerHTML='<div class="empty">아직 소비 기록이 없어요.</div>';
+    return;
+  }
+  list.innerHTML=data.history.slice(0,10).map(h=>`
+    <div class="rowline">
+      <div>
+        <b>${h.type==="cancel"?"🌱 취소":"🛒 구매"}
+        ${escapeHTML(h.name)}</b>
+        <div class="muted">${escapeHTML(h.category)} · ${dateLabel(h.time)}</div>
+      </div>
+      <strong style="color:${h.type==="cancel"?"#10a779":"#15244a"}">
+        ${h.type==="cancel"?"절약 ":""}${money(h.price)}
+      </strong>
+    </div>
+  `).join("");
+}
+function renderAnalysis(){
+  const totals=Object.fromEntries(CATEGORIES.map(c=>[c,0]));
+  data.history
+    .filter(h=>h.type==="purchase" && monthKey(h.time)===currentMonth())
+    .forEach(h=>{totals[h.category]=(totals[h.category]||0)+h.price});
+
+  const total=Object.values(totals).reduce((a,b)=>a+b,0);
+  if(total===0){
+    el("analysis").innerHTML='<div class="empty">📊 분석할 구매 내역이 없어요.</div>';
+    el("advice").textContent="첫 구매를 기록하면 다음 달 소비 계획을 추천해 드려요.";
+    return;
+  }
+  const sorted=Object.entries(totals).sort((a,b)=>b[1]-a[1]);
+  el("analysis").innerHTML=sorted.map(([cat,value])=>`
+    <div class="bar-row">
+      <div class="bar-label">
+        <span>${escapeHTML(cat)}</span>
+        <b>${money(value)} (${(value/total*100).toFixed(0)}%)</b>
+      </div>
+      <div class="bar"><div style="width:${value/total*100}%"></div></div>
+    </div>
+  `).join("");
+
+  const [topCategory,topAmount]=sorted[0];
+  const suggested=Math.floor(topAmount*0.9);
+  const nextBudget=Math.max(1,Math.floor(data.budget*0.95));
+  el("advice").textContent=
+    "💡 이번 달 가장 지출이 많은 항목은 '"+topCategory+
+    "'이에요. 다음 달에는 이 항목을 "+money(suggested)+
+    " 이내로 줄여 보세요. 전체 소비 예산도 "+
+    money(nextBudget)+"으로 계획해 보는 것을 추천해요.";
+}
+function render(){
+  renderStats();
+  renderGrade();
+  renderBudget();
+  renderPending();
+  renderRewards();
+  renderHistory();
+  renderAnalysis();
+  el("threshold").value=data.threshold;
+  el("thresholdText").textContent=money(data.threshold);
+}
+
+settleMonths();
+render();
+
+// 1초마다 구매 대기 카운트다운 업데이트
+setInterval(()=>{
+  if(data.pending.length)renderPending();
+  if(!Object.prototype.hasOwnProperty.call(data.budgets,currentMonth())){
+    settleMonths();
+    render();
+  }
+},1000);
+</script>
+</body>
+</html>
